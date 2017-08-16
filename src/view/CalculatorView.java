@@ -6,58 +6,66 @@ import javax.swing.JOptionPane;
 import util.CalculatorBean;
 import util.CalculatorOperation;
 
-public class CalculatorView extends javax.swing.JFrame {
+public class CalculatorView extends javax.swing.JFrame
+{
     private MainController controller;
     
     private double value1;
     private double value2;
     private double result;
     private String operation;
-    /**
-     * Creates new form CalculatorView
-     */
-    public CalculatorView() {
+
+    public CalculatorView()
+    {
         initComponents();
-        controller = new MainController();
-        value1 = 0;
-        value2 = 0;
-        operation = "";
+        this.controller = new MainController();
+        this.value1 = 0;
+        this.value2 = 0;
+        this.operation = "";
         setIconImage(new ImageIcon(getClass().getResource("../resources/icon.png")).getImage());
     }
     
-    public void performAction() {
-        CalculatorBean calculatorData = new CalculatorBean();
-        CalculatorOperation op = CalculatorOperation.ADD;
+    public void performAction()
+    {
+        CalculatorBean calculatorData;
+        CalculatorOperation currentOperation;
+        
+        calculatorData = new CalculatorBean();
+        currentOperation = CalculatorOperation.ADD;
+        
         calculatorData.setValue1(value1);
         calculatorData.setValue2(value2);
         
-        switch (operation) {
+        switch (this.operation) {
             case "+":
-                op = CalculatorOperation.ADD;
+                currentOperation = CalculatorOperation.ADD;
                 break;
             case "-":
-                op = CalculatorOperation.SUBTRACT;
+                currentOperation = CalculatorOperation.SUBTRACT;
                 break;
             case "*":
-                op = CalculatorOperation.MULTIPLY;
+                currentOperation = CalculatorOperation.MULTIPLY;
                 break;
             case "/":
-                op = CalculatorOperation.DIVIDE;
+                currentOperation = CalculatorOperation.DIVIDE;
                 break;
             case "√":
-                op = CalculatorOperation.RADIX;
+                currentOperation = CalculatorOperation.RADIX;
                 break;
             case "xⁿ":
-                op = CalculatorOperation.POWER;
+                currentOperation = CalculatorOperation.POWER;
                 break;
             case "%":
-                op = CalculatorOperation.PERCENTAGE;
+                currentOperation = CalculatorOperation.PERCENTAGE;
                 break;
         }
-        CalculatorBean resultData = controller.performAction(calculatorData, op);
-        value1 = resultData.getValue1();
-        value2 = resultData.getValue2();
-        result = resultData.getResult();
+        
+        CalculatorBean resultData;
+        
+        resultData = this.controller.performAction(calculatorData, currentOperation);
+        this.value1 = resultData.getValue1();
+        this.value2 = resultData.getValue2();
+        this.result = resultData.getResult();
     }
 
     @SuppressWarnings("unchecked")
@@ -237,38 +245,41 @@ public class CalculatorView extends javax.swing.JFrame {
     }//GEN-LAST:event_percentageActionPerformed
 
     private void equalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equalsActionPerformed
-        if (operationDisplay.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "No hay una operacion definida", "Error", JOptionPane.ERROR_MESSAGE);
+        if (this.operationDisplay.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "No hay una operacion definida",
+                                            "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         try{
-            operation = operationDisplay.getText();
-            value1 = Double.parseDouble(valueDisplay1.getText());
-            value2 = Double.parseDouble(valueDisplay2.getText());
+            this.operation = this.operationDisplay.getText();
+            this.value1 = Double.parseDouble(this.valueDisplay1.getText());
+            this.value2 = Double.parseDouble(this.valueDisplay2.getText());
             performAction();
-            resultDisplay.setText(Double.toString(result));
+            this.resultDisplay.setText(Double.toString(this.result));
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Los valores no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Los valores no son correctos",
+                                            "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_equalsActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
-        valueDisplay1.setText("");
-        valueDisplay2.setText("");
-        operationDisplay.setText("");
-        resultDisplay.setText("");
-        value1 = 0;
-        value2 = 0;
-        operation = "";
+        this.valueDisplay1.setText("");
+        this.valueDisplay2.setText("");
+        this.operationDisplay.setText("");
+        this.resultDisplay.setText("");
+        this.value1 = 0;
+        this.value2 = 0;
+        this.operation = "";
     }//GEN-LAST:event_clearActionPerformed
 
     private void powerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_powerActionPerformed
-        operationDisplay.setText("xⁿ");
+        this.operationDisplay.setText("xⁿ");
     }//GEN-LAST:event_powerActionPerformed
 
     private void radixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radixActionPerformed
-        operationDisplay.setText("√");
+        this.operationDisplay.setText("√");
     }//GEN-LAST:event_radixActionPerformed
 
     /**
@@ -303,11 +314,15 @@ public class CalculatorView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CalculatorView().setVisible(true);
-            }
-        });
+        java.awt.EventQueue.invokeLater(
+                new Runnable()
+                {
+                    public void run()
+                    {
+                        new CalculatorView().setVisible(true);
+                    }
+                }
+        );
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

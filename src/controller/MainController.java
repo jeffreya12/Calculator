@@ -4,48 +4,50 @@ import model.CalculatorModel;
 import util.CalculatorBean;
 import util.CalculatorOperation;
 
-public class MainController {
+public class MainController
+{
     private CalculatorModel model;
     
-    public MainController() {
-        model = new CalculatorModel();
+    public MainController()
+    {
+        this.model = new CalculatorModel();
     }
     
-    public CalculatorBean performAction(
-            CalculatorBean calculatorData,
-            CalculatorOperation operation) {
+    public CalculatorBean performAction(CalculatorBean pCalculatorData,
+                                        CalculatorOperation pOperation)
+    {
+        this.model.setValue1(pCalculatorData.getValue1());
+        this.model.setValue2(pCalculatorData.getValue2());
         
-        model.setValue1(calculatorData.getValue1());
-        model.setValue2(calculatorData.getValue2());
-        
-        switch (operation) {
+        switch (pOperation)
+        {
             case ADD:
-                model.add();
+                this.model.add();
                 break;
             case SUBTRACT:
-                model.subtract();
+                this.model.subtract();
                 break;
             case MULTIPLY:
-                model.multiply();
+                this.model.multiply();
                 break;
             case DIVIDE:
-                model.divide();
+                this.model.divide();
                 break;
             case POWER:
-                model.power();
+                this.model.power();
                 break;
             case RADIX:
-                model.radix();
+                this.model.radix();
                 break;
             case PERCENTAGE:
-                model.percentage();
+                this.model.percentage();
                 break;
         }
         
-        calculatorData.setValue1(model.getValue1());
-        calculatorData.setValue2(model.getValue2());
-        calculatorData.setResult(model.getResult());
+        pCalculatorData.setValue1(this.model.getValue1());
+        pCalculatorData.setValue2(this.model.getValue2());
+        pCalculatorData.setResult(this.model.getResult());
         
-        return calculatorData;
+        return pCalculatorData;
     }
 }
